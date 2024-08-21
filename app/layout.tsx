@@ -3,7 +3,6 @@ import { Noto_Sans_KR, Black_Han_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/src/app";
 import { cn } from "@/lib/utils";
-import { Header } from "@/src/widgets";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -40,7 +39,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
+          {/* <Header /> */}
           {children}
         </ThemeProvider>
       </body>
