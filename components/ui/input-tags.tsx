@@ -67,7 +67,8 @@ const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
           onChange={(e) => setPendingDataPoint(e.target.value)}
           onKeyDown={(e) => {
             // 한글을 onKeyDown이 두 번 실행하는 문제 해결
-            if (e.nativeEvent.isComposing || e.keyCode === 229) return;
+            if (e.nativeEvent.isComposing) return;
+
             if (e.key === "Enter" || e.key === ",") {
               e.preventDefault();
               addPendingDataPoint();
