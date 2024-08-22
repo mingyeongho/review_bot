@@ -3,6 +3,7 @@ import { Noto_Sans_KR, Black_Han_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/src/app";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/src/widgets";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -28,7 +29,7 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background noto-sans-kr black-han-sans antialiased",
+          "noto-sans-kr black-han-sans antialiased relative",
           notoSansKR.variable,
           blackHanSans.variable
         )}
@@ -39,7 +40,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="m-auto relative max-w-screen-md min-h-screen h-screen w-full">
+            {children}
+          </div>
+          <ModeToggle />
         </ThemeProvider>
       </body>
     </html>
