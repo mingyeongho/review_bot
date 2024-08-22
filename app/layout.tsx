@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/src/app";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/src/widgets";
+import { APP_SUB_NAME } from "@/src/shared";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -16,7 +17,7 @@ const blackHanSans = Black_Han_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ㄹㅂㅂ",
+  title: `리뷰봇: ${APP_SUB_NAME}`,
   description: "리뷰봇",
 };
 
@@ -40,7 +41,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="m-auto relative max-w-screen-md min-h-screen h-screen w-full">
+          <div className="m-auto relative min-h-dvh h-dvh w-full max-w-screen-sm ">
             {children}
           </div>
           <ModeToggle />
