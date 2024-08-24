@@ -12,7 +12,7 @@ export default function Home() {
         {APP_SUB_NAME}
       </span>
       <div className="w-60 mt-6">
-        <Link href="/start">
+        <Link href="/generate">
           <Button className="w-full text-1xl" size="lg">
             시작하기
           </Button>
