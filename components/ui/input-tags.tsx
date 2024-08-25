@@ -69,7 +69,8 @@ const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
             // 한글을 onKeyDown이 두 번 실행하는 문제 해결
             if (e.nativeEvent.isComposing) return;
 
-            if (e.key === "Enter" || e.key === ",") {
+            // FIXME 스페이스일 때랑 콤마일 때 오류 수정해야됨.
+            if (e.key === "Enter" || e.key === "," || e.code === "Space") {
               e.preventDefault();
               addPendingDataPoint();
             } else if (

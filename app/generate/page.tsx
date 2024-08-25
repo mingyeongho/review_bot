@@ -1,6 +1,5 @@
-import { InputTags } from "@/components/ui/input-tags";
 import { APP_NAME } from "@/src/shared";
-import { Generate } from "@/src/widgets/Generate/Generate";
+import { Generate } from "@/src/widgets";
 import Link from "next/link";
 
 const page = () => {
