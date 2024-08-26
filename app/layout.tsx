@@ -18,7 +18,7 @@ const blackHanSans = Black_Han_Sans({
 
 export const metadata: Metadata = {
   title: `리뷰봇: ${APP_SUB_NAME}`,
-  description: "리뷰봇",
+  description: APP_SUB_NAME,
 };
 
 export default function RootLayout({
@@ -41,10 +41,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="m-auto relative min-h-dvh h-dvh w-full max-w-screen-sm ">
+          <div className="m-auto relative min-h-dvh h-dvh w-full max-w-screen-sm">
             {children}
           </div>
-          <ModeToggle />
+          <ModeToggle className="absolute bottom-7 right-7" />
         </ThemeProvider>
       </body>
     </html>
