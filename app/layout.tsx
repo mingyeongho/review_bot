@@ -41,7 +41,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="m-auto relative min-h-dvh h-dvh w-full max-w-screen-sm">
+          <div className="m-auto relative min-h-dvh h-dvh w-full max-w-screen-sm px-5 sm:p-0">
             {children}
           </div>
           <ModeToggle className="absolute bottom-7 right-7" />
