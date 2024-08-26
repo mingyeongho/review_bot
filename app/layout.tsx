@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/src/app";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/src/widgets";
 import { APP_SUB_NAME } from "@/src/shared";
+import { Toaster } from "@/components/ui/sonner";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
             {children}
           </div>
           <ModeToggle className="absolute bottom-7 right-7" />
+          <Toaster duration={2000} />
         </ThemeProvider>
       </body>
     </html>

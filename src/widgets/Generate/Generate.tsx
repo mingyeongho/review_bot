@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { InputTags } from "@/components/ui/input-tags";
-import { Label } from "@/components/ui/label";
-import { Copy, EllipsisIcon } from "lucide-react";
-import { useState } from "react";
+import { Check, Copy, EllipsisIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function Generate() {
   const { register, getValues } = useForm<{
@@ -24,8 +24,13 @@ export function Generate() {
       count: 100,
     },
   });
+  const count = getValues("count");
   const [keywords, setKeywords] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const [copied, setCopied] = useState(false);
+
+  const [generatedReview, setGeneratedReivew] = useState("");
 
   const onGenerate = async () => {
     const count = getValues("count");
@@ -42,7 +47,7 @@ export function Generate() {
           count,
         }),
       }).then((res) => res.json());
-
+      setGeneratedReivew(res.content);
       console.log(res);
     } catch (err: any) {
       const { ok, status, code } = err;
@@ -52,6 +57,15 @@ export function Generate() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (copied) {
+        setCopied(false);
+      }
+      return () => clearTimeout(timeout);
+    }, 1000);
+  }, [copied]);
 
   return (
     <div className="flex-1 flex flex-col justify-center items-center gap-4 w-full">
@@ -76,30 +90,32 @@ export function Generate() {
             onClick={onGenerate}
             disabled={keywords.length === 0}
           >
-            {loading ? <EllipsisIcon /> : "만들기"}
+            만들기
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Share link</DialogTitle>
-            <DialogDescription>
-              Anyone who has this link will be able to view this.
+            <DialogTitle>리뷰</DialogTitle>
+            <DialogDescription className="text-lg">
+              Q.{keywords.join(", ")}에 대한 리뷰를 {count}자 이내로 작성해줘.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex items-center space-x-2">
-            <div className="grid flex-1 gap-2">
-              <Label htmlFor="link" className="sr-only">
-                Link
-              </Label>
-              <Input
-                id="link"
-                defaultValue="https://ui.shadcn.com/docs/installation"
-                readOnly
-              />
-            </div>
-            <Button type="submit" size="sm" className="px-3">
+          <div className="w-full rounded-md border border-slate-400 w-full p-2 flex flex-col gap-2">
+            <div>{loading ? <EllipsisIcon /> : generatedReview}</div>
+            <Button
+              type="button"
+              className="w-full h-12"
+              onClick={() => {
+                setCopied(true);
+                toast("리뷰가 복사되었습니다.");
+              }}
+            >
               <span className="sr-only">Copy</span>
-              <Copy className="h-4 w-4" />
+              {copied ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
             </Button>
           </div>
         </DialogContent>
