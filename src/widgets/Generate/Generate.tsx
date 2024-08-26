@@ -107,6 +107,7 @@ export function Generate() {
               className="w-full h-12"
               onClick={() => {
                 setCopied(true);
+                navigator.clipboard.writeText(generatedReview);
                 toast("리뷰가 복사되었습니다.");
               }}
             >
