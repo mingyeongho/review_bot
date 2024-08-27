@@ -74,6 +74,7 @@ export function Generate() {
         onChange={setKeywords}
         className="border-slate-400 w-full"
         placeholder="키워드를 입력해 주세요. Enter, 콤마, 스페이스로 구분됩니다."
+        autoFocus
       />
       <Input
         {...register("count")}

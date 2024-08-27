@@ -20,11 +20,17 @@ const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
     const [pendingDataPoint, setPendingDataPoint] = React.useState("");
 
     React.useEffect(() => {
-      if (pendingDataPoint.includes(",")) {
-        const newDataPoints = new Set([
-          ...value,
-          ...pendingDataPoint.split(",").map((chunk) => chunk.trim()),
-        ]);
+      // space 또는 comman 입력 시 pendingDataPoint에 값이 있으면 value에 추가
+      if (pendingDataPoint.includes(" ") || pendingDataPoint.includes(",")) {
+        // pendingDataPoint의 마지막 문자가 공백이나 콤마일 경우 제거
+        const removeLastChar = pendingDataPoint.slice(0, -1);
+
+        // 아무것도 입력하지 않고 comma나 space를 입력했을 때 값이 추가되지 않도록 처리
+        if (removeLastChar.length === 0) {
+          return setPendingDataPoint("");
+        }
+
+        const newDataPoints = new Set([...value, removeLastChar]);
         onChange(Array.from(newDataPoints));
         setPendingDataPoint("");
       }
@@ -70,7 +76,7 @@ const InputTags = React.forwardRef<HTMLInputElement, InputTagsProps>(
             if (e.nativeEvent.isComposing) return;
 
             // FIXME 스페이스일 때랑 콤마일 때 오류 수정해야됨.
-            if (e.key === "Enter" || e.key === "," || e.code === "Space") {
+            if (e.key === "Enter") {
               e.preventDefault();
               addPendingDataPoint();
             } else if (
