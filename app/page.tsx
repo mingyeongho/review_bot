@@ -1,6 +1,7 @@
+import { signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { APP_NAME, APP_SUB_NAME } from "@/src/shared";
-import Link from "next/link";
+import { Github } from "lucide-react";
 
 export default function Home() {
   return (
@@ -12,11 +13,18 @@ export default function Home() {
         {APP_SUB_NAME}
       </span>
       <div className="w-60 mt-6">
-        <Link href="/generate">
-          <Button className="w-full text-1xl" size="lg">
-            시작하기
+        <form
+          action={async () => {
+            "use server";
+            await signIn("github", {
+              redirectTo: "/generate",
+            });
+          }}
+        >
+          <Button className="w-full" size={"lg"} type="submit">
+            <Github />
           </Button>
-        </Link>
+        </form>
       </div>
     </main>
   );
