@@ -1,7 +1,7 @@
 import { signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { APP_NAME, APP_SUB_NAME } from "@/src/shared";
-import { Github } from "lucide-react";
+import { GithubIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -21,8 +21,24 @@ export default function Home() {
             });
           }}
         >
-          <Button className="w-full" size={"lg"} type="submit">
-            <Github />
+          <Button className="w-full" size="lg" type="submit">
+            <GithubIcon />
+          </Button>
+        </form>
+        <form
+          action={async () => {
+            "use server";
+            await signIn("kakao", {
+              redirectTo: "/generate",
+            });
+          }}
+        >
+          <Button
+            className="w-full bg-[#FEE500] text-[#000000] text-3xl hover:opacity-70 hover:bg-[#FEE500]"
+            size="lg"
+            type="submit"
+          >
+            카카오 로그인
           </Button>
         </form>
       </div>
